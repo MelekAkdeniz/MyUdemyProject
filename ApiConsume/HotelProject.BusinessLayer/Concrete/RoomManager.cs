@@ -40,9 +40,6 @@ namespace HotelProject.BusinessLayer.Concrete
         {
             _roomDal.Update(t);
         }
-        public List<Room> TGetListById(int id)
-        {
-            return _roomDal.GetListById(id);
-        }
+       
     }
 }
