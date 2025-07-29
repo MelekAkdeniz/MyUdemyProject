@@ -1,5 +1,6 @@
 ﻿using HotelProject.DataAccessLayer.Concrete;
 using HotelProject.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HotelProject.DataAccessLayer.Concrete
 {
-    public class Context:DbContext
+    public class Context:IdentityDbContext<AppUser,AppRole,int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
