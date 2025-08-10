@@ -28,7 +28,7 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" aps-for="Name" placeholder="Adınız Soyadınız">
+                                    <input type="text" class="form-control" asp-for="Name" placeholder="Adınız Soyadınız">
                                     <label for="name">Adınız Soyadınız</label>
                                 </div>
                             </div>
@@ -63,8 +63,9 @@
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <select class="form-select" id="select2" asp-for="ChildCount">
-                                        <option value="1">Çocuk 1</option>
-                                        <option value="2">Çocuk 2</option>
+                                        <option value="1">Çocuk 0</option>
+                                        <option value="2">Çocuk 1</option>
+                                        <option value="3">Çocuk 2</option>
                                         <option value="3">Çocuk 3</option>
                                     </select>
                                     <label for="select2">Çocuk Sayısı</label>
