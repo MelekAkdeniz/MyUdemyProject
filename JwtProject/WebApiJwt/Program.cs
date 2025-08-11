@@ -20,7 +20,7 @@ namespace WebApiJwt
                 {
                     ValidIssuer = "https://localhost",
                     ValidAudience = "https://localhost",
-                    IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes("aspnetcoreapiapi")),
+                    IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes("aspnetcoreapiapiaspnetcoreapiapi")),
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = true
                 };
