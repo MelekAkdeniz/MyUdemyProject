@@ -22,7 +22,8 @@ namespace WebApiJwt
                     ValidAudience = "https://localhost",
                     IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes("aspnetcoreapiapiaspnetcoreapiapi")),
                     ValidateIssuerSigningKey = true,
-                    ValidateLifetime = true
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero 
                 };
 
             });

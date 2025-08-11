@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace WebApiJwt.Models
@@ -19,6 +20,27 @@ namespace WebApiJwt.Models
             );
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
             return handler.WriteToken(token);
+        }
+        public string TokenCreateAdmin()
+        {
+            var bytes = Encoding.UTF8.GetBytes("aspnetcoreapiapiaspnetcoreapiapi");
+            SymmetricSecurityKey key = new SymmetricSecurityKey(bytes);
+            SigningCredentials signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            List<Claim> clams = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier,Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, "Admin"),
+                new Claim(ClaimTypes.Role, "Visitor")
+            };
+            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(issuer: "https://localhost",
+                audience: "https://localhost",
+                notBefore: DateTime.Now,
+                expires: DateTime.Now.AddSeconds(30),
+                signingCredentials: signingCredentials,
+                claims: clams
+            );
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            return handler.WriteToken(jwtSecurityToken);
         }
     }
 }
