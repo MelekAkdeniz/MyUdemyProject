@@ -16,7 +16,8 @@ namespace HotelProject.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-BPMLTJH\\SQLEXPRESS;initial catalog=ApiDb;integrated security=true;Trust Server Certificate=True; ");
+            //optionsBuilder.UseSqlServer("server=DESKTOP-BPMLTJH\\SQLEXPRESS;initial catalog=ApiDb;integrated security=true;Trust Server Certificate=True; ");
+            optionsBuilder.UseSqlServer(@"server=DESKTOP-NDIDOSR\SQLEXPRESS;initial catalog=ApiDb;integrated security=true;Trust Server Certificate=True;");
         }
         public DbSet<Room>? Rooms { get; set; }
         public DbSet<Service>? Services { get; set; }
