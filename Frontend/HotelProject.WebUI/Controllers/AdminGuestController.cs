@@ -1,4 +1,5 @@
-﻿using HotelProject.WebUI.Dtos.GuestDto;
+﻿using FluentValidation;
+using HotelProject.WebUI.Dtos.GuestDto;
 using HotelProject.WebUI.Models.Staff;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -32,19 +33,51 @@ namespace HotelProject.WebUI.Controllers
         {
             return View();
         }
+        //[HttpPost]
+        //public async Task<IActionResult> AddGuest(CreateGuestDto createGuestDto)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var client = _httpClientFactory.CreateClient();
+        //        var jsonData = JsonConvert.SerializeObject(createGuestDto);
+        //        StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+        //        var responseMessage = await client.PostAsync("http://localhost:40510/api/Guest", stringContent);
+        //        if (responseMessage.IsSuccessStatusCode)
+        //        {
+        //            return RedirectToAction("Index");
+        //        }
+        //        return View();
+        //    }
+        //    return View();
+        //}
         [HttpPost]
-        public async Task<IActionResult> AddGuest(CreateGuestDto createGuestDto)
+        public async Task<IActionResult> AddGuest(CreateGuestDto createGuestDto, [FromServices] IValidator<CreateGuestDto> validator)
         {
+            // FluentValidation ile manuel doğrulama
+            var validationResult = validator.Validate(createGuestDto);
+
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+                return View(createGuestDto);
+            }
+
+            // Model geçerli, HTTP isteğini gönder
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createGuestDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
             var responseMessage = await client.PostAsync("http://localhost:40510/api/Guest", stringContent);
+
             if (responseMessage.IsSuccessStatusCode)
-            {
                 return RedirectToAction("Index");
-            }
-            return View();
+
+            return View(createGuestDto);
         }
+
         public async Task<IActionResult> DeleteGuest(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -69,17 +102,32 @@ namespace HotelProject.WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateGuest(UpdateGuestDto updateGuestDto)
+        public async Task<IActionResult> UpdateGuest(UpdateGuestDto updateGuestDto, [FromServices] IValidator<UpdateGuestDto> validator)
         {
+            // FluentValidation ile manuel doğrulama
+            var validationResult = validator.Validate(updateGuestDto);
+
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+                return View(updateGuestDto);
+            }
+
+            // Model geçerli, HTTP isteğini gönder
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateGuestDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("http://localhost:40510/api/Guest/", stringContent);
+            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var responseMessage = await client.PutAsync("http://localhost:40510/api/Guest", stringContent);
+
             if (responseMessage.IsSuccessStatusCode)
-            {
                 return RedirectToAction("Index");
-            }
-            return View();
+
+            return View(updateGuestDto);
         }
     }
 }
+
