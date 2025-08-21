@@ -24,14 +24,14 @@
             <img class="mr-3 rounded-circle" src="~/adminweb/images/avatar/1.jpg">
             <div class="media-body">
                 <h5 class="m-b-3" @Model.Name</h5>
-                <p class="m-b-2">@(((DateTime)Model.Date).ToString("dd-MMM-yyyy"))/p>
+                <p class="m-b-2">@(((DateTime)Model.Date).ToString("dd-MMM-yyyy"))</p>
             </div>
 
         </div>
         <hr>
         <div class="media mb-4 mt-1">
             <div class="media-body">
-                <h4 class="m-0 text-primary">@Model.Subject</h4><small class="text-muted">MAil:@Model.Mail</small>
+                <h4 class="m-0 text-primary">@Model.Subject</h4><small class="text-muted">Mail:@Model.Mail</small>
             </div>
         </div>
         <p>@Model.Message</p>
