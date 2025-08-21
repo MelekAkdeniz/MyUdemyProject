@@ -31,6 +31,14 @@ namespace HotelProject.WebUI
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.LoginPath = "/Login/Index";
+            });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -38,15 +46,26 @@ namespace HotelProject.WebUI
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+           
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
 
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error404", "?code={0}");
+            app.UseHttpsRedirection();
+           
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.MapControllerRoute(
+    name: "404",
+    pattern: "{*url}",
+    defaults: new { controller = "ErrorPage", action = "Error404" });
 
             app.Run();
         }
