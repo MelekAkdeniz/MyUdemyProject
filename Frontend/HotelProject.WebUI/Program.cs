@@ -47,25 +47,19 @@ namespace HotelProject.WebUI
                 app.UseExceptionHandler("/Home/Error");
             }
 
-           
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error404", "?code={0}");
+            app.UseHttpsRedirection();
+
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error404", "?code={0}");
-            app.UseHttpsRedirection();
-           
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            app.MapControllerRoute(
-    name: "404",
-    pattern: "{*url}",
-    defaults: new { controller = "ErrorPage", action = "Error404" });
 
             app.Run();
         }

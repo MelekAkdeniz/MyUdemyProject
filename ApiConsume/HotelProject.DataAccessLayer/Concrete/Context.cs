@@ -19,6 +19,7 @@ namespace HotelProject.DataAccessLayer.Concrete
             //optionsBuilder.UseSqlServer("server=DESKTOP-BPMLTJH\\SQLEXPRESS;initial catalog=ApiDb;integrated security=true;Trust Server Certificate=True; ");
             optionsBuilder.UseSqlServer(@"server=DESKTOP-NDIDOSR\SQLEXPRESS;initial catalog=ApiDb;integrated security=true;Trust Server Certificate=True;");
         }
+       
         public DbSet<Room>? Rooms { get; set; }
         public DbSet<Service>? Services { get; set; }
         public DbSet<Staff>? Staffs { get; set; }
