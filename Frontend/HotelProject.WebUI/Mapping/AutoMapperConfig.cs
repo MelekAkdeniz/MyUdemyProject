@@ -4,6 +4,7 @@ using HotelProject.WebUI.Dtos.AboutDto;
 using HotelProject.WebUI.Dtos.BookingDto;
 using HotelProject.WebUI.Dtos.GuestDto;
 using HotelProject.WebUI.Dtos.LoginDto;
+using HotelProject.WebUI.Dtos.MessageCategoryDto;
 using HotelProject.WebUI.Dtos.RegisterDto;
 using HotelProject.WebUI.Dtos.RoomDto;
 using HotelProject.WebUI.Dtos.ServiceDto;
@@ -42,6 +43,8 @@ namespace HotelProject.WebUI.Mapping
 
             CreateMap<CreateGuestDto,Guest>().ReverseMap();
             CreateMap<UpdateGuestDto,Guest>().ReverseMap();
+
+            CreateMap<ResultMessageCategoryDto, MessageCategory>().ReverseMap();
 
         }
     }
