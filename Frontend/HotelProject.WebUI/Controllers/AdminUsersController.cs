@@ -16,7 +16,7 @@ namespace HotelProject.WebUI.Controllers
         public IActionResult Index()
         {
             var values=_userManager.Users.ToList();
-            return View();
+            return View(values);
         }
     }
 }
