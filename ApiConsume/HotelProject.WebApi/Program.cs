@@ -4,6 +4,7 @@ using HotelProject.BusinessLayer.Concrete;
 using HotelProject.DataAccessLayer.Abstract;
 using HotelProject.DataAccessLayer.Concrete;
 using HotelProject.DataAccessLayer.EntityFramework;
+using HotelProject.EntityLayer.Concrete;
 
 namespace HotelProject.WebApi
 {
@@ -15,7 +16,7 @@ namespace HotelProject.WebApi
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllersWithViews().AddNewtonsoftJson(options=>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             builder.Services.AddDbContext<Context>();
 
@@ -54,6 +55,9 @@ namespace HotelProject.WebApi
 
             builder.Services.AddScoped<IWorkLocationDal, EfWorkLocationDal>();
             builder.Services.AddScoped<IWorkLocationService, WorkLocationManager>();
+
+            builder.Services.AddScoped<IAppUserDal, EfAppUserDal>();
+            builder.Services.AddScoped<IAppUserService, AppUserManager>();
 
             builder.Services.AddAutoMapper(typeof(Program));
 
