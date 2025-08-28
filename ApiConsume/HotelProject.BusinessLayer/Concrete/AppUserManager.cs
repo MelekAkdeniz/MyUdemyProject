@@ -20,27 +20,27 @@ namespace HotelProject.BusinessLayer.Concrete
 
         public void TDelete(AppUser t)
         {
-            throw new NotImplementedException();
+            _appUserDal.Delete(t);
         }
 
         public AppUser TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _appUserDal.GetById(id); 
         }
 
         public List<AppUser> TGetList()
         {
-            throw new NotImplementedException();
+            return _appUserDal.GetList();
         }
 
         public void TInsert(AppUser t)
         {
-            throw new NotImplementedException();
+            _appUserDal.Insert(t);
         }
 
         public void TUpdate(AppUser t)
         {
-            throw new NotImplementedException();
+            _appUserDal.Update(t);
         }
 
         public List<AppUser> TUserListWithWorkLocation()
