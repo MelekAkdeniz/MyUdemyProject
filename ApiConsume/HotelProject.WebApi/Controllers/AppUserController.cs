@@ -1,4 +1,5 @@
 ﻿using HotelProject.BusinessLayer.Abstract;
+using HotelProject.WebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,16 +14,22 @@ namespace HotelProject.WebApi.Controllers
         {
             _appUserService = appUserService;
         }
-        //[HttpGet]
-        //public IActionResult UserListWithWorkLocation()
-        //{
-        //    var values = _appUserService.TUserListWithWorkLocation();
-        //    return Ok(values);
-        //}
         [HttpGet]
-        public IActionResult AppUserList()
+        public IActionResult UserListWithWorkLocation()
         {
-            var values = _appUserService.TGetList();
+            var values = _appUserService.TUserListWithWorkLocation()
+        .Select(y => new AppUserWorkLocationViewModel
+        {
+            Name = y.Name,
+            Surname = y.Surname,
+            WorkLocationID = y.WorkLocationID,
+            WorkLocationName = y.WorkLocation.WorkLocationName,
+            City = y.City,
+            Country = y.Country,
+            Gender = y.Gender,
+            ImageUrl = y.ImageUrl
+        }).ToList();
+
             return Ok(values);
         }
     }
