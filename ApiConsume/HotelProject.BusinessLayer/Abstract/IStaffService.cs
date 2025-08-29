@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace HotelProject.BusinessLayer.Abstract
 {
     public interface IStaffService:IGenericService<Staff>
-    {      
+    {
+        int TGetStaffCount();
     }
 }

@@ -15,5 +15,12 @@ namespace HotelProject.DataAccessLayer.EntityFramework
         public EfBookingDal(Context context) : base(context)
         {
         }
+
+        public int GetBookingCount()
+        {
+            var context= new Context();
+            var values = context.Bookings.Count();
+            return values;
+        }
     }
 }
