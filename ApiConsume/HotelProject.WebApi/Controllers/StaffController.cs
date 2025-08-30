@@ -12,12 +12,12 @@ namespace HotelProject.WebApi.Controllers
         private readonly IStaffService _staffService;
         public StaffController(IStaffService staffService)
         {
-            _staffService= staffService;
+            _staffService = staffService;
         }
         [HttpGet]
         public IActionResult StaffList()
         {
-            var values=_staffService.TGetList();
+            var values = _staffService.TGetList();
             return Ok(values);
         }
         [HttpPost]
@@ -29,7 +29,7 @@ namespace HotelProject.WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteStaff(int id)
         {
-            var values=_staffService.TGetById(id);
+            var values = _staffService.TGetById(id);
             _staffService.TDelete(values);
             return Ok();
         }
@@ -42,7 +42,13 @@ namespace HotelProject.WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetStaff(int id)
         {
-            var values= _staffService.TGetById(id);
+            var values = _staffService.TGetById(id);
+            return Ok(values);
+        }
+        [HttpGet("Last4Staff")]
+        public IActionResult Last4Staff()
+        {
+            var values = _staffService.TLast4Staff();
             return Ok(values);
         }
     }
