@@ -9489,9 +9489,12 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     color: #fff; }
 
 .social-icons .googlePlus {
-  background: #db4439; }
-  .social-icons .googlePlus i, .social-icons .googlePlus span {
-    color: #fff; }
+    background: #db4439;
+}
+
+    .social-icons .googlePlus i, .social-icons .googlePlus span {
+        color: #fff;
+    }
 
 .media-reply {
   margin-bottom: 20px; }
