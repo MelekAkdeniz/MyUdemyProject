@@ -25,6 +25,8 @@ namespace HotelProject.WebUI.ViewComponents.Dashboard
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
                 ResultInstagramFollowersDto resultInstagramFollowersDtos = JsonConvert.DeserializeObject<ResultInstagramFollowersDto>(body);
+                ViewBag.v1= resultInstagramFollowersDtos.following;
+                ViewBag.v2= resultInstagramFollowersDtos.followers;
                 return View(resultInstagramFollowersDtos);
             }
         }
