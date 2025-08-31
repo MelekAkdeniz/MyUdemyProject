@@ -47,8 +47,8 @@ namespace HotelProject.WebUI.ViewComponents.Dashboard
                 response2.EnsureSuccessStatusCode();
                 var body2 = await response2.Content.ReadAsStringAsync();
                 ResultTwitterFollowersDto resultTwitterFollowersDto = JsonConvert.DeserializeObject<ResultTwitterFollowersDto>(body2);
-                ViewBag.v1 = resultTwitterFollowersDto.data.stats.following;
-                ViewBag.v2 = resultTwitterFollowersDto.data.stats.followers;
+                ViewBag.v3 = resultTwitterFollowersDto.data.stats.following;
+                ViewBag.v4 = resultTwitterFollowersDto.data.stats.followers;
                 //return View(resultTwitterFollowersDto);
             }
             return View();
