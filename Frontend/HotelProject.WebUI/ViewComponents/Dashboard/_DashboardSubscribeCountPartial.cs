@@ -27,7 +27,6 @@ namespace HotelProject.WebUI.ViewComponents.Dashboard
                 ResultInstagramFollowersDto resultInstagramFollowersDtos = JsonConvert.DeserializeObject<ResultInstagramFollowersDto>(body);
                 ViewBag.v1 = resultInstagramFollowersDtos.following;
                 ViewBag.v2 = resultInstagramFollowersDtos.followers;
-                //return View(resultInstagramFollowersDtos);
             }
 
 
@@ -49,7 +48,27 @@ namespace HotelProject.WebUI.ViewComponents.Dashboard
                 ResultTwitterFollowersDto resultTwitterFollowersDto = JsonConvert.DeserializeObject<ResultTwitterFollowersDto>(body2);
                 ViewBag.v3 = resultTwitterFollowersDto.data.stats.following;
                 ViewBag.v4 = resultTwitterFollowersDto.data.stats.followers;
-                //return View(resultTwitterFollowersDto);
+            }
+
+           
+            var client3 = new HttpClient();
+            var request3 = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri("https://tiktok-api23.p.rapidapi.com/api/user/info?uniqueId=skakgun"),
+                Headers =
+    {
+        { "x-rapidapi-key", "b7d12692e3msh1f3ad94cf6bbe2ap10af52jsn8e0f11eabc88" },
+        { "x-rapidapi-host", "tiktok-api23.p.rapidapi.com" },
+    },
+            };
+            using (var response3 = await client3.SendAsync(request3))
+            {
+                response3.EnsureSuccessStatusCode();
+                var body3 = await response3.Content.ReadAsStringAsync();
+                ResultTiktokFollowersDto resultTiktokFollowersDto = JsonConvert.DeserializeObject<ResultTiktokFollowersDto>(body3);
+                ViewBag.v5 = resultTiktokFollowersDto.userInfo.stats.followingCount;
+                ViewBag.v6 = resultTiktokFollowersDto.userInfo.stats.followerCount;
             }
             return View();
         }
