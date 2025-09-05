@@ -27,6 +27,11 @@ namespace HotelProject.WebUI.Controllers
             }
             return View();
         }
+
+
+
+
+
         public async Task<IActionResult> ApprovedReservation(ApprovedReservationDto approvedReservationDto)
         {
             //eksikler var 
