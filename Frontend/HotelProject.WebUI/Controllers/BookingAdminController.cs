@@ -28,7 +28,7 @@ namespace HotelProject.WebUI.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ApprovedReservation2(int id)
+        public async Task<IActionResult> ApprovedReservation(int id)
         {
             
             var client = _httpClientFactory.CreateClient();
@@ -41,20 +41,19 @@ namespace HotelProject.WebUI.Controllers
             return View();
         }
 
-
-
-        public async Task<IActionResult> ApprovedReservation(ApprovedReservationDto approvedReservationDto)
+        public async Task<IActionResult> CancelReservation(int id)
         {
-            //eksikler var 
+
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(approvedReservationDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("http://localhost:40510/api/Booking/", stringContent);
+
+            var responseMessage = await client.GetAsync($"http://localhost:40510/api/Booking/BookingCancel{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
             }
             return View();
         }
+
+
     }
 }
