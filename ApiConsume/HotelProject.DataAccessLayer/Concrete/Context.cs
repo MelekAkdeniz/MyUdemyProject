@@ -12,14 +12,34 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HotelProject.DataAccessLayer.Concrete
 {
-    public class Context:IdentityDbContext<AppUser,AppRole,int>
+    public class Context : IdentityDbContext<AppUser, AppRole, int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("server=DESKTOP-BPMLTJH\\SQLEXPRESS;initial catalog=ApiDb;integrated security=true;Trust Server Certificate=True; ");
             optionsBuilder.UseSqlServer(@"server=DESKTOP-NDIDOSR\SQLEXPRESS;initial catalog=ApiDb;integrated security=true;Trust Server Certificate=True;");
         }
-       
+
+        protected override void OnModelCreating(ModelBuilder builder) 
+        { 
+            base.OnModelCreating(builder);
+            
+            builder.Entity<Guest>(entry => 
+            { 
+                entry.ToTable("Guests", tb => tb.HasTrigger("Guestincrase"));
+            });
+
+            builder.Entity<Room>(entry =>
+            {
+                entry.ToTable("Rooms", tb => tb.HasTrigger("Roomincrase"));
+            });
+
+            builder.Entity<Staff>(entry =>
+            {
+                entry.ToTable("Staffs", tb => tb.HasTrigger("Staffincrase"));
+            });
+
+        }
         public DbSet<Room>? Rooms { get; set; }
         public DbSet<Service>? Services { get; set; }
         public DbSet<Staff>? Staffs { get; set; }
@@ -32,7 +52,6 @@ namespace HotelProject.DataAccessLayer.Concrete
         public DbSet<SendMessage>? SendMessages { get; set; }
         public DbSet<MessageCategory>? MessageCategories { get; set; }
         public DbSet<WorkLocation>? WorkLocations { get; set; }
-        
+
     }
 }
-//Data Source = DESKTOP - BPMLTJH\SQLEXPRESS; Initial Catalog = ; Integrated Security = True; Connect Timeout = 30; Encrypt = True; Trust Server Certificate=True; Application Intent = ReadWrite; Multi Subnet Failover=False
