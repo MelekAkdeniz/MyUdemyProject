@@ -1,4 +1,4 @@
-## 🏨 MyUdemyProject: Otel Yönetim Sistemi
+## 🏨 Cunklab / Hotelier - Bir Otel Yönetim Paneli Projesi
 
 MyUdemyProject, otel yönetimini dijitalleştiren ve modernize eden kapsamlı bir yazılım çözümüdür. .NET 8, Blazor, JWT, RapidAPI ve daha birçok modern teknolojiyi bir araya getirerek, otel işletmelerinin operasyonel verimliliğini artırmayı hedefler.
 
