@@ -66,8 +66,8 @@ namespace HotelProject.WebUI.ViewComponents.Dashboard
                 response3.EnsureSuccessStatusCode();
                 var body3 = await response3.Content.ReadAsStringAsync();
                 ResultTiktokFollowersDto resultTiktokFollowersDto = JsonConvert.DeserializeObject<ResultTiktokFollowersDto>(body3);
-                ViewBag.v5 = resultTiktokFollowersDto.userInfo.stats.followingCount;
-                ViewBag.v6 = resultTiktokFollowersDto.userInfo.stats.followerCount;
+                ViewBag.v6 = resultTiktokFollowersDto.userInfo.stats.followingCount;
+                ViewBag.v5 = resultTiktokFollowersDto.userInfo.stats.followerCount;
             }
             return View();
         }
